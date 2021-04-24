@@ -6,7 +6,7 @@
 /*   By: xuwang <xuwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 11:28:35 by xuwang            #+#    #+#             */
-/*   Updated: 2021/03/26 21:03:11 by xuwang           ###   ########.fr       */
+/*   Updated: 2021/03/26 21:50:28 by xuwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ char *ft_strjoin(char const *s1, char const *s2)
 	while (s2 && i < len && s2[j])
 		tab[i++] = s2[j++];
 	tab[i] = '\0';
+	free((char *)s1);
 	return (tab);
 }

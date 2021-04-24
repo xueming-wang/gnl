@@ -6,7 +6,7 @@
 /*   By: xuwang <xuwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:43:40 by xuwang            #+#    #+#             */
-/*   Updated: 2021/03/26 21:13:58 by xuwang           ###   ########.fr       */
+/*   Updated: 2021/03/26 22:11:19 by xuwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,31 +35,34 @@ char *first_line(char *str)
     return (line);
 }
 
-char  *save_line(char *str)
+char  *save_line(char *save)
 {
-    char *save;
+    char *str;
     int i;
     int j;
 
     i = 0;
     j = 0;
-    if (!str)
+    if (!save)
         return(0);
-    while (str[i] && str[i]!= '\n')
+    while (save[i] && save[i]!= '\n')
         i++;
-    if (!str[i])
+    if (!save[i])
+    {
+        free(save);
         return (0);
-    save = (char *)malloc(sizeof(char) * ft_strlen(str) - i + 1);
-    if(!save)
+    }
+    str = (char *)malloc(sizeof(char) * ft_strlen(save) - i + 1);
+    if(!str)
         return(0);
     i++;
-    while (str[i])
+    while (save[i])
     {
-        save[j++] = str[i++];
+        str[j++] = save[i++];
     }
-    free (str);
-    save[j] = '\0';
-    return (save);
+    free(save);
+    str[j] = '\0';
+    return (str);
 }
 
 int     ft_newline(char *save)
@@ -82,7 +85,7 @@ int get_next_line(int fd, char **line)
 {
     char            buf[BUFFER_SIZE + 1];
     int             read_num;
-    static char     *save = NULL;  // (read的字符串)
+    static char     *save;   // (read的字符串)
 
     read_num = 1;
     if (fd < 0 || !line || BUFFER_SIZE <= 0) 
