@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xuwang <xuwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:43:40 by xuwang            #+#    #+#             */
-/*   Updated: 2021/05/26 23:36:08 by xuwang           ###   ########.fr       */
+/*   Updated: 2021/05/26 23:50:48 by xuwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char *first_line(char *str)
 {
@@ -85,21 +85,21 @@ int get_next_line(int fd, char **line)
 {
     char            buf[BUFFER_SIZE + 1];
     int             read_num;
-    static char     *save;   // (read的字符串)
+    static char     *save[FD_MAX_SIZE];   // (read的字符串)
 
     read_num = 1;
     if (fd < 0 || !line || BUFFER_SIZE <= 0) 
       return (-1);
-    while (read_num != 0 && !ft_newline(save)) 
+    while (read_num != 0 && !ft_newline(save[fd])) 
     {
         read_num = read(fd, buf, BUFFER_SIZE);
         if (read_num == -1)
             return(-1);
         buf[read_num] = '\0';
-        save = ft_strjoin(save, buf); //第一次read的字符串,第二次是第一次\n后面剩的字符 + 第二次读的字符串)
+        save[fd] = ft_strjoin(save[fd], buf); //第一次read的字符串,第二次是第一次\n后面剩的字符 + 第二次读的字符串)
     }
-    *line = first_line(save); // read的字符串保存\n前面的字符保存在line；
-    save = save_line(save);  // \n后面的字符保存用于第二次链接；
+    *line = first_line(save[fd]); // read的字符串保存\n前面的字符保存在line；
+    save[fd] = save_line(save[fd]);  // \n后面的字符保存用于第二次链接；
     if (read_num == 0)
         return (0);
     return (1);
