@@ -6,7 +6,7 @@
 /*   By: xuwang <xuwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:43:40 by xuwang            #+#    #+#             */
-/*   Updated: 2021/05/27 14:38:19 by xuwang           ###   ########.fr       */
+/*   Updated: 2021/05/27 21:08:29 by xuwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char	*first_line(char *str)
 		i++;
 	line = (char *)malloc(sizeof(char) * i + 1);
 	if (!line)
-		return (0);
+		return (NULL);
 	i = 0;
 	while (str[i] && str[i] != '\n')
 	{
@@ -54,7 +54,7 @@ static char	*save_line(char *save)
 	}
 	str = (char *)malloc(sizeof(char) * ft_strlen(save) - i + 1);
 	if (!str)
-		return (0);
+		return (NULL);
 	i++;
 	while (save[i])
 		str[j++] = save[i++];

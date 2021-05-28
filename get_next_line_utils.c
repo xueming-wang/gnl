@@ -38,7 +38,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	len = i + j + 1;
 	tab = (char *)malloc(sizeof(char) * len);
 	if (!tab)
-		return (0);
+		return (NULL);
 	i = 0;
 	j = 0;
 	while (s1 && i < len && s1[i])

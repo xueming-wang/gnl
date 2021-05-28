@@ -24,7 +24,7 @@ static char	*first_line(char *str)
 		i++;
 	line = (char *)malloc(sizeof(char) * i + 1);
 	if (!line)
-		return (0);
+		return (NULL);
 	i = 0;
 	while (str[i] && str[i] != '\n')
 	{
@@ -54,7 +54,7 @@ static char	*save_line(char *save)
 	}
 	str = (char *)malloc(sizeof(char) * ft_strlen(save) - i + 1);
 	if (!str)
-		return (0);
+		return (NULL);
 	i++;
 	while (save[i])
 		str[j++] = save[i++];
