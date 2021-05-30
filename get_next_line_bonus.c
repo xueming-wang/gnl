@@ -6,7 +6,7 @@
 /*   By: xuwang <xuwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 16:43:40 by xuwang            #+#    #+#             */
-/*   Updated: 2021/05/27 21:08:29 by xuwang           ###   ########.fr       */
+/*   Updated: 2021/05/30 19:22:56 by xuwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	get_next_line(int fd, char **line)
 	static char	*save[FD_MAX_SIZE];
 
 	read_num = 1;
-	if (fd < 0 || !line || BUFFER_SIZE <= 0)
+	if (fd < 0 || !line || BUFFER_SIZE <= 0 || fd >= FD_MAX_SIZE)
 		return (-1);
 	while (read_num != 0 && !ft_newline(save[fd]))
 	{
